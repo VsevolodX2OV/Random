@@ -13,6 +13,7 @@ public class Random {
         }
         return true;
     }
+
     public static boolean random_double(Collection<Double> collection, long numbers) {
         if (numbers <= 0)
         {
@@ -23,15 +24,25 @@ public class Random {
         }
         return true;
     }
-    public static String random_string(int max_length) {
-        int length = Math.max(1, (int)(Math.random() * max_length));
-        StringBuilder str = new StringBuilder("");
-        while (str.length() < length) {
-            int b = 65 + (int)(Math.random() * 57);
-            if ((b > 96) || (b < 91))
-                str.append((char)b);
+
+    public static String random_create_string(int maxLength) {
+        String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        char[] str = new char[maxLength];
+        String result = new String();
+        for (int i = 0; i < maxLength; ++i){
+            str[i] = letters.charAt((int) (Math.random() * 53));
+            result = result + str[i];
         }
-        String result = str.toString();
         return result;
+    }
+
+    public static boolean random_string(Collection<String> collection, int maxLength, long numbers  ){
+        if(numbers <= 0) {
+            return false;
+        }
+        for(int i = 0; i < numbers; ++i){
+            collection.add(Random.random_create_string(maxLength));
+        }
+        return true;
     }
 }
